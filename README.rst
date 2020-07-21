@@ -18,7 +18,7 @@ You can install the plugin by using pip
 How to use it
 =============
 
-this is and example of how to implementend on your code
+this is an example of how to implement on your code
 
 
 .. code-block:: python
