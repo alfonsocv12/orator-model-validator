@@ -5,7 +5,7 @@ with open("README.rst", 'r') as fh:
 
 setuptools.setup(
     name="orator_validator",
-    version="0.1.1",
+    version="0.1.3",
     author="Alfonso Villalobos",
     author_email="alfonso@codepeat.com",
     license='MIT',
