@@ -1,0 +1,11 @@
+__pycache__
+
+#Packages
+dist
+build
+_build
+orator_validator.egg-info/
+
+#Local
+.DS_Store
+modules/
