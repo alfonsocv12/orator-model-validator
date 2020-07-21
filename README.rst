@@ -54,6 +54,6 @@ this is an example of how to implement on your code
 the validate function accept this params
 
 * **require:** boolean when True checks if they send the value
-* **data_type:** string Verifies if the value is specific data type
+* **data_type:** object Verifies if the value is specific data type
 * **regex:** string pass a regex to verified
 * **date_str:** string witch you want to check the format of the date example '%H:%M'

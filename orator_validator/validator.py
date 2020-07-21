@@ -72,7 +72,7 @@ class Validator(object):
         cls._validation_init = validation_init
         errors = cls.__errors__
         cls.__errors__ = {'code':200, 'errors':[]}
-        if errors: raise Exception(errors)
+        if errors['code'] != 200: raise Exception(errors)
 
     @classmethod
     def _modify_errors(cls, code=None, msg=None):
