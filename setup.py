@@ -5,13 +5,15 @@ with open("README.rst", 'r') as fh:
 
 setuptools.setup(
     name="orator_validator",
-    version="0.1.3",
+    version="0.2",
     author="Alfonso Villalobos",
     author_email="alfonso@codepeat.com",
     license='MIT',
     description="Orator Validator provides the best Model implement validation for Orator",
     long_description=long_description,
     packages=setuptools.find_packages(),
+    py_modules=['orator_validator'],
+    scripts=['orator_validator.py'],
     classifiers=[
         "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: MIT License",

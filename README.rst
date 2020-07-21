@@ -23,8 +23,8 @@ this is an example of how to implement on your code
 
 .. code-block:: python
 
-  from orator_validator.validator import Validator
   from orator import Model
+  from orator_validator import Validator
 
 
   class User(Model, Validator):
