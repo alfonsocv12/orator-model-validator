@@ -12,7 +12,7 @@ You can install the plugin by using pip
 
 .. code-block:: bash
 
-  pip install orator-model-validator
+  pip install orator-validator
 
 
 How to use it
