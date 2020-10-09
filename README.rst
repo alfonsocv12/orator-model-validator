@@ -2,8 +2,9 @@ Orator Validator
 ################
 
 This is an orator plugin that you can use to validate
-your model when the user is creating a new item on the
-database is easy to use and cleans the code a lot
+your model when the user is creating a new item or
+updating one on the database is easy to use and cleans 
+the code a lot
 
 Installation
 ============
@@ -46,6 +47,10 @@ this is an example of how to implement on your code
           user.validate(
               'password', regex="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{6,}$"
           )
+          user.errors()
+
+      def updating(self, user):
+          user.validate_update('email', guarded=True)
           user.errors()
 
   User.observe(UserValidation())
