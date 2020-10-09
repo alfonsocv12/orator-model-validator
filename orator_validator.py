@@ -43,7 +43,8 @@ class Validator(object):
             regex=False, custom_error=False, date_str=False, *args):
         '''
         Funtion dedicated to validate on update that values on updated are the
-        ones on the list
+        ones on the list for you to use this function the update has to be on the
+        model side not on the builder
 
         param: str key: This is the name of the value that we are looking, is just for us to make the error json
         param: bool guarded: This tell us if we need to abort if the input is on the dictionary
@@ -57,7 +58,6 @@ class Validator(object):
         if self._validation_init:
             self.errors(validation_init = False)
         value = self.get_dirty().get(key, None)
-        print(value)
         if guarded and value:
             self._handle_error('Cant update', key, custom_error=custom_error, *args)
             return self
