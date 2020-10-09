@@ -39,6 +39,43 @@ class Validator(object):
                 self._handle_error('invalid', key, custom_msg='Invalid time value')
         return self
 
+    def validate_update(self, key, guarded=False, data_type=False,
+            regex=False, custom_error=False, date_str=False, *args):
+        '''
+        Funtion dedicated to validate on update that values on updated are the
+        ones on the list
+
+        param: str key: This is the name of the value that we are looking, is just for us to make the error json
+        param: bool guarded: This tell us if we need to abort if the input is on the dictionary
+        param: str data_type: Data type tell us if the input has to be a certain data type so we verified
+        param: str regex: String that we could check if we need
+        param: function custom_error: you can send a function to build a custom error
+        param: date_str: This is a string with the format to check the datetime string
+        param: *args *args: arguments to go with the function
+        return: data response: We can return the value validated or None if the value doest correspont to the statements
+        '''
+        if self._validation_init:
+            self.errors(validation_init = False)
+        value = self.get_dirty().get(key, None)
+        print(value)
+        if guarded and value:
+            self._handle_error('Cant update', key, custom_error=custom_error, *args)
+            return self
+        else:
+            if data_type and not isinstance(value, data_type):
+                self._handle_error('data type', key, custom_msg='Bad data type on {}'.format(key),
+                    custom_error=custom_error, *args)
+                return self
+            if regex and not re.match(regex, value):
+                if not require: self.validate(key, require=True)
+                self._handle_error('regex', key, custom_error=custom_error, *args)
+            if date_str:
+                try:
+                    time.strptime(value, date_str)
+                except Exception as e:
+                    self._handle_error('invalid', key, custom_msg='Invalid time value')
+        return self
+
     @classmethod
     def _handle_error(cls, type_error, value_name,
             custom_msg=False, custom_error=False, *args):
