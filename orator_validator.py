@@ -6,7 +6,7 @@ class Validator(object):
 
     # @classmethod
     def validate(self, key, require=False, data_type=False,
-            regex=False, custom_error=False, date_str=False, *args):
+            regex=False, custom_error=False, date_str=False, **args):
         '''
         Function dedicated to validate if a imput has some values
 
@@ -23,15 +23,15 @@ class Validator(object):
             self.errors(validation_init = False)
         value = getattr(self, key, None)
         if require and not value:
-            self._handle_error('require', key, custom_error=custom_error, *args)
+            self._handle_error('require', key, custom_error=custom_error, **args)
             return self
         if data_type and not isinstance(value, data_type):
             self._handle_error('data type', key, custom_msg='Bad data type on {}'.format(key),
-                custom_error=custom_error, *args)
+                custom_error=custom_error, **args)
             return self
         if regex and not re.match(regex, value):
             if not require: self.validate(key, require=True)
-            self._handle_error('regex', key, custom_error=custom_error, *args)
+            self._handle_error('regex', key, custom_error=custom_error, **args)
         if date_str:
             try:
                 time.strptime(value, date_str)
@@ -40,7 +40,8 @@ class Validator(object):
         return self
 
     def validate_update(self, key, guarded=False, data_type=False,
-            regex=False, custom_error=False, date_str=False, *args):
+            regex=False, custom_error=False, date_str=False,
+            function_callback=False, **args):
         '''
         Funtion dedicated to validate on update that values on updated are the
         ones on the list for you to use this function the update has to be on the
@@ -59,26 +60,33 @@ class Validator(object):
             self.errors(validation_init = False)
         value = self.get_dirty().get(key, None)
         if guarded and value:
-            self._handle_error('Cant update', key, custom_error=custom_error, *args)
+            self._handle_error('Cant update', key, custom_error=custom_error, **args)
             return self
         else:
             if data_type and not isinstance(value, data_type):
                 self._handle_error('data type', key, custom_msg='Bad data type on {}'.format(key),
-                    custom_error=custom_error, *args)
+                    custom_error=custom_error, **args)
                 return self
             if regex and not re.match(regex, value):
                 if not require: self.validate(key, require=True)
-                self._handle_error('regex', key, custom_error=custom_error, *args)
+                self._handle_error('regex', key, custom_error=custom_error, **args)
             if date_str:
                 try:
                     time.strptime(value, date_str)
                 except Exception as e:
-                    self._handle_error('invalid', key, custom_msg='Invalid time value')
+                    self._handle_error(
+                        'invalid', key, custom_msg='Invalid time value')
+            if function_callback:
+                try:
+                    function_callback(**args)
+                except Exception as e:
+                    self._handle_error(
+                        'Callback error', key, custom_msg=str(e))
         return self
 
     @classmethod
     def _handle_error(cls, type_error, value_name,
-            custom_msg=False, custom_error=False, *args):
+            custom_msg=False, custom_error=False, **args):
         '''
         Funtion dedicated to handle errors on the validation
 
@@ -86,11 +94,11 @@ class Validator(object):
         param: str value_name: this is use for the default msg
         param: str custom_msg: is they want to use a custom_msg
         param: function custom_error: Optional to send a custom error
-        param: args *args: Values of the custom error
+        param: args **args: Values of the custom error
         return: None
         '''
         if custom_error:
-            custom_error(*args)
+            custom_error(**args)
         cls._modify_errors(code=400, msg=custom_msg
                 if custom_msg else
                 'Error of {} on {}'.format(type_error, value_name)
