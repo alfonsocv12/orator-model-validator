@@ -62,7 +62,7 @@ class Validator(object):
         if guarded and value:
             self._handle_error('Cant update', key, custom_error=custom_error, **args)
             return self
-        else:
+        elif value:
             if data_type and not isinstance(value, data_type):
                 self._handle_error('data type', key, custom_msg='Bad data type on {}'.format(key),
                     custom_error=custom_error, **args)
