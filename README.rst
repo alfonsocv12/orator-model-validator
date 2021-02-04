@@ -13,7 +13,7 @@ You can install the plugin by using pip
 
 .. code-block:: bash
 
-  pip install orator-validator
+  $ pip install orator-validator
 
 
 How to use it
@@ -47,22 +47,30 @@ this is an example of how to implement on your code
           user.validate(
               'password', regex="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{6,}$"
           )
+          user.process('phone_number', exist=self.__process_phone)
           user.errors()
 
       def updating(self, user):
           user.validate_update('email', guarded=True)
           user.validate_update(
-            'password', function_callback=self._validate_new_password, user=user
+            'password', function_callback=self.__validate_new_password, user=user
           )
           user.errors()
 
-      def _validate_new_password(self, user):
+      def __validate_new_password(self, user):
           '''
           Validate that the new password is diferent than the old one
           '''
           User.find(user.id)
           if user.password == User.find(user.id).password:
             raise Exception("Can't update password with old one")
+
+      def __process_phone(self, user):
+          '''
+          This function process the phone if the user send one
+          '''
+          if user.phone[0] != "+":
+            user.phone = "+1 {}".format(user.phone)
 
   User.observe(UserValidation())
 
