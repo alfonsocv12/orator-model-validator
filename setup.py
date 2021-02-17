@@ -1,4 +1,8 @@
-import setuptools, sys
+import setuptools
+import sys
+
+if sys.version_info < (3, 0):
+     raise NotImplementedError("Sorry, you need at least Python 2.7 or Python 3.4+ to use bottle.")
 
 with open("README.rst", 'r') as fh:
     long_description = fh.read()
@@ -13,8 +17,6 @@ setuptools.setup(
     description="Orator Validator provides the best Model validation for Orator",
     long_description=long_description,
     packages=setuptools.find_packages(),
-    py_modules=['orator_validator'],
-    scripts=['orator_validator.py'],
     classifiers=[
         "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: MIT License",
