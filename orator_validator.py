@@ -6,21 +6,6 @@ class Validator(object):
     _validation_init = True
     __errors__ = {'code':200, 'errors':[]}
 
-    def process(self, key, exist=False, not_exist=False, **args):
-        '''
-        This function is created to add new functionality, if a model value of a
-        nullable filled exist
-
-        param: str key: This is the name of the value that we are looking
-        param: exist: this boolean is dedicated to execute a flag if the key exist
-        param: not_exist: this boolean is dedicated to execute a flag if the key doesnt exist
-        '''
-        value = getattr(self, key, None)
-        if exist and value:
-            exist(self, **args)
-        if not_exist and not value:
-            not_exist(self, **args)
-
     def validate(self, key, require=False, data_type=False,
             regex=False, custom_error=False, date_str=False, **args):
         '''
@@ -99,6 +84,21 @@ class Validator(object):
                     self._handle_error(
                         'Callback error', key, custom_msg=str(e))
         return self
+
+    def process(self, key, exist=False, not_exist=False, **args):
+        '''
+        This function is created to add new functionality, if a model value of a
+        nullable filled exist
+
+        param: str key: This is the name of the value that we are looking
+        param: exist: this boolean is dedicated to execute a flag if the key exist
+        param: not_exist: this boolean is dedicated to execute a flag if the key doesnt exist
+        '''
+        value = getattr(self, key, None)
+        if exist and value:
+            exist(self, **args)
+        if not_exist and not value:
+            not_exist(self, **args)
 
     @classmethod
     def _handle_error(cls, type_error, value_name,
