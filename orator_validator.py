@@ -115,7 +115,7 @@ class Validator(object):
         '''
         if custom_error:
             custom_error(**args)
-        cls._modify_errors(code=400, msg=custom_msg
+        cls.add_error(code=400, msg=custom_msg
                 if custom_msg else
                 'Error of {} on {}'.format(type_error, value_name)
         )
@@ -137,7 +137,7 @@ class Validator(object):
             raise ValidatorError(errors['code'], json.dumps(errors['errors']))
 
     @classmethod
-    def _modify_errors(cls, code=None, msg=None):
+    def add_error(cls, code=None, msg=None):
         '''
         Function dedicated to modify errors
 
