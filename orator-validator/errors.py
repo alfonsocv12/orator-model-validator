@@ -1,3 +1,9 @@
+def deprecated():
+    def wrapper(callable_obj):
+        print(callable_obj)
+        return callable_obj
+    return wrapper
+
 class Error(Exception):
     """Base class for other exceptions"""
     pass

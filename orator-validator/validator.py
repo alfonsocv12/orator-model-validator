@@ -1,8 +1,13 @@
 import re
 import time
 import json
+from .errors import (
+    deprecated, ValidatorError
+)
+
 
 class Validator(object):
+
     _validation_init = True
     __errors__ = {'code':200, 'errors':[]}
 
@@ -40,6 +45,7 @@ class Validator(object):
                 self._handle_error('invalid', key, custom_msg='Invalid time value')
         return self
 
+    @deprecated
     def validate_update(self, key, guarded=False, data_type=False,
             regex=False, custom_error=False, date_str=False,
             function_callback=False, **args):
@@ -85,6 +91,7 @@ class Validator(object):
                         'Callback error', key, custom_msg=str(e))
         return self
 
+    @deprecated
     def process(self, key, exist=False, not_exist=False, **args):
         '''
         This function is created to add new functionality, if a model value of a
@@ -150,14 +157,3 @@ class Validator(object):
             cls.__errors__['errors'].append({
                 'msg': msg
             })
-
-class Error(Exception):
-    """Base class for other exceptions"""
-    pass
-
-class ValidatorError(Error):
-    """Raised when the validator find and error"""
-
-    def __init__(self, status_code=None, body=None):
-        self.status_code = status_code
-        self.body = body

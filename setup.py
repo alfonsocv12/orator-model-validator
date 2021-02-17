@@ -5,11 +5,12 @@ with open("README.rst", 'r') as fh:
 
 setuptools.setup(
     name="orator_validator",
-    version="0.4.0",
+    version="0.5.0",
+    url="https://github.com/alfonsocv12/orator-validator",
     author="Alfonso Villalobos",
     author_email="alfonso@codepeat.com",
     license='MIT',
-    description="Orator Validator provides the best Model implement validation for Orator",
+    description="Orator Validator provides the best Model validation for Orator",
     long_description=long_description,
     packages=setuptools.find_packages(),
     py_modules=['orator_validator'],
