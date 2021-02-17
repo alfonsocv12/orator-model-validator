@@ -6,7 +6,7 @@ name: Twine check
 on:
   push:
     branch:
-      - master
+      - main
 
 jobs:
   deploy:
