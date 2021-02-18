@@ -1,14 +1,22 @@
-def deprecated(callable_obj):
-    def wrapper(callable_obj):
-        print(callable_obj)
-        return callable_obj
-    return wrapper
+def deprecated(callable_func):
+    '''
+    Deprecated decorator to print warning on deprecated functions
 
-class Error(Exception):
-    """Base class for other exceptions"""
-    pass
+    param: callable_func
+    ptype: function
+    return: wrapper
+    rtype: function
+    '''
+    warnings.warn_explicit(
+        "{} function is deprecated".format(callable_func.__name__),
+        category=DeprecationWarning,
+        filename=callable_func.__code__.co_filenname,
+        lineno=callable_func.__code__.co_firstlineno + 1
+    )
+    return callable_func
 
-class ValidatorError(Error):
+
+class ValidatorError(Exception):
     """Raised when the validator find and error"""
 
     def __init__(self, status_code=None, body=None):
