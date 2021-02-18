@@ -13,8 +13,8 @@ def deprecated(callable_func):
     warnings.warn_explicit(
         "{} function is deprecated".format(callable_func.__name__),
         category=DeprecationWarning,
-        filename=callable_func.__code__.co_filenname,
-        lineno=callable_func.__code__.co_firstlineno + 1
+        filename=callable_func.func_code.co_filenname,
+        lineno=callable_func.func_code.co_firstlineno + 1
     )
     return callable_func
 
