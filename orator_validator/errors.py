@@ -1,4 +1,4 @@
-def deprecated():
+def deprecated(callable_obj):
     def wrapper(callable_obj):
         print(callable_obj)
         return callable_obj
