@@ -1,3 +1,6 @@
+import warnings
+
+
 def deprecated(callable_func):
     '''
     Deprecated decorator to print warning on deprecated functions
