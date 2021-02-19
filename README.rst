@@ -1,6 +1,8 @@
 Orator Validator
 ################
 
+[![Downloads](https://pepy.tech/badge/orator-validator)](https://pepy.tech/project/orator-validator)
+
 This is a orator plugin that you can use to validate
 your model when the user is creating a new item or
 updating one on the database is easy to use and cleans
@@ -75,9 +77,24 @@ this is an example of how to implement on your code
   User.observe(UserValidation())
 
 
-the validate function accept this params
+the validate function accepts this params
 
 * **require:** boolean when True checks if they send the value
 * **data_type:** object Verifies if the value is specific data type
 * **regex:** string pass a regex to verified
 * **date_str:** string witch you want to check the format of the date example '%H:%M'
+
+the validate_function accepts this params
+
+* **guarded:** boolean if True value cannot be updated
+* **data_tpe:** needs to send specific data type
+* **regex:** regex to validate the value
+* **date_str:** string to validate a date format
+* **function_callback:** callback function if the value was send
+* **args:** arguments for the function callbacks
+
+the process function accepts
+
+* **exist:** function uses as a callback if the value was send
+* **not_exist:** function uses as a callback if the value was not send
+* **args:** arguments for the function callbacks
