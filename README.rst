@@ -24,6 +24,9 @@ You can install the plugin by using pip
 How to use it
 =============
 
+Setup
+-----
+
 this is an example of how to implement on your orator model
 
 
@@ -47,8 +50,11 @@ this is an example of how to implement on your orator model
 
   User.observe(UserValidation())
 
+Functions available
+-------------------
+
 Validate saving function
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 the validate function accepts this params
 
@@ -58,7 +64,7 @@ the validate function accepts this params
 * **date_str:** string witch you want to check the format of the date example '%H:%M'
 
 Example
--------
+~~~~~~~
 
 .. code-block:: python
 
@@ -73,7 +79,7 @@ Example
       user.errors()
 
 Validate update function
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 the validate_update accepts this params
 
@@ -85,7 +91,7 @@ the validate_update accepts this params
 * **args:** arguments for the function callbacks
 
 Example
--------
+~~~~~~~
 
 .. code-block:: python
 
@@ -105,7 +111,7 @@ Example
         raise Exception("Can't update password with old one")
 
 Process function
-----------------
+~~~~~~~~~~~~~~~~
 
 the process function accepts
 
@@ -114,7 +120,7 @@ the process function accepts
 * **args:** arguments for the function callbacks
 
 Example
--------
+~~~~~~~
 
 .. code-block:: python
 
