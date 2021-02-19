@@ -1,7 +1,10 @@
 Orator Validator
 ################
 
-[![Downloads](https://pepy.tech/badge/orator-validator)](https://pepy.tech/project/orator-validator)
+|Downloads|
+
+.. |Downloads| image:: https://pepy.tech/badge/orator-validator
+   :target: https://pepy.tech/project/orator-validator
 
 This is a orator plugin that you can use to validate
 your model when the user is creating a new item or
