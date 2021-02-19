@@ -8,9 +8,9 @@ with open("README.rst", 'r') as fh:
     long_description = fh.read()
 
 setuptools.setup(
+    url="https://pypi.org/project/orator-validator/",
     name="orator_validator",
     version="0.5.0",
-    url="https://github.com/alfonsocv12/orator-validator",
     author="Alfonso Villalobos",
     author_email="alfonso@codepeat.com",
     license='MIT',

@@ -35,9 +35,10 @@ class Validator(object):
             self._handle_error('data type', key, custom_msg='Bad data type on {}'.format(key),
                 custom_error=custom_error, **args)
             return self
-        if regex and not re.match(regex, value):
-            if not require: self.validate(key, require=True)
-            self._handle_error('regex', key, custom_error=custom_error, **args)
+        if regex:
+            if not value: self._handle_error('require', key, custom_error=custom_error, **args)
+            elif not re.match(regex, value):
+                self._handle_error('regex', key, custom_error=custom_error, **args)
         if date_str:
             try:
                 time.strptime(value, date_str)
