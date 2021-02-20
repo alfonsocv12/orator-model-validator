@@ -11,8 +11,7 @@ class Validator(object):
     _validation_init = True
     __errors__ = {'code':200, 'errors':[]}
 
-    def validate(self, key, require=False, data_type=False,
-            regex=False, custom_error=False, date_str=False, **args):
+    def validate(self, key, require=False, data_type=False, regex=False, custom_error=False, date_str=False, **args):
         '''
         Function dedicated to validate if a imput has some values
 

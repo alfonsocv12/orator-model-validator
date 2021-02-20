@@ -22,5 +22,8 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent"
     ],
+    install_requires=[
+        "switch>=1.1.0"
+    ],
     python_requires='>=3.7'
 )
