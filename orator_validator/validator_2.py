@@ -14,15 +14,8 @@ class Validator(object):
         '''
         Function dedicated to validate input to a model
 
-        #####
+        ##### kwargs.keys() validate with a array
         '''
-        if len(kwarg) > 1:
-            raise ValidatorError(
-                500,
-                json.dumps({
-                    'code':500, 'errors':['More than one arg on validation']
-                })
-            )
         with Switch(kwarg):
             if case()
 
